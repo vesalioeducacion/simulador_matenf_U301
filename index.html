@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnitudes, Medidas y Sistema Internacional de Unidades | UCCuyo</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Outfit -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f1f6eb',
+              100: '#e3edcf',
+              200: '#c7dba0',
+              300: '#abc971',
+              400: '#8eb742',
+              500: '#436600',
+              600: '#395700',
+              700: '#2f4700',
+              800: '#253800',
+              900: '#1a2800'
+            },
+            clinical: {
+              50: '#F0F9FF',
+              100: '#E0F2FE',
+              500: '#0284C7',
+              600: '#0369A1',
+              700: '#075985'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #f7f9f6;
+    }
+    /* Paleta Institucional UCCuyo (Verde Oliva) */
+    .text-accent { color: #436600; }
+    .bg-accent { background-color: #436600; }
+    .bg-accent-hover:hover { background-color: #324d00; }
+    .bg-accent-light { background-color: #f1f6eb; }
+    .border-accent { border-color: #436600; }
+
+    .text-primary { color: #436600; }
+    .bg-primary { background-color: #436600; }
+    .bg-primary-dark { background-color: #324d00; }
+    .border-primary { border-color: #436600; }
+
+    .focus-accent:focus {
+      border-color: #436600;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(67, 102, 0, 0.2);
+    }
+
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    button.bg-accent span {
+      color: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .card-hover {
+      transition: all 0.25s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -4px rgba(67, 102, 0, 0.12);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased selection:bg-[#436600] selection:text-white">
+
+  <!-- Cabecera Institucional UCCuyo -->
+  <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-xl shadow-md">
+          MAT
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold text-gray-800 tracking-wide uppercase">MAGNITUDES, MEDIDAS Y SISTEMA INTERNACIONAL (SI)</h1>
+          <p class="text-xs text-gray-500 font-semibold">Matemática • Licenciatura en Enfermería (FCM - UCCuyo)</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#f1f6eb] text-[#436600] border border-[#436600]/20">
+          <i class="fa-solid fa-graduation-cap"></i> Curso de Ingreso
+        </span>
+        <!-- Botón Guía de Uso -->
+        <button onclick="openTutorial()" class="flex items-center gap-1.5 px-3 py-1.5 bg-accent text-white text-xs font-semibold rounded-lg shadow-sm hover:opacity-90 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Guía de Uso
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal con Navegación Lateral -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 flex flex-col lg:flex-row gap-6">
+
+    <!-- Menú de Navegación Lateral -->
+    <nav class="w-full lg:w-64 flex flex-row lg:flex-col gap-2 bg-white p-3 rounded-2xl shadow-sm border border-gray-100 overflow-x-auto lg:overflow-x-visible whitespace-nowrap lg:whitespace-normal sticky top-20 h-fit">
+      <button onclick="switchTab('tab-inicio')" id="btn-tab-inicio" class="bg-accent text-white flex-1 lg:flex-none text-left py-2.5 px-4 rounded-xl text-sm font-semibold transition flex items-center gap-2.5 shadow-xs">
+        <i class="fa-solid fa-compass text-sm text-white"></i>
+        <span>Presentación General</span>
+      </button>
+      <button onclick="switchTab('tab-modulo1')" id="btn-tab-modulo1" class="text-gray-700 hover:bg-gray-100 flex-1 lg:flex-none text-left py-2.5 px-4 rounded-xl text-sm font-medium transition flex items-center gap-2.5">
+        <i class="fa-solid fa-cubes text-sm text-[#436600]"></i>
+        <span>1. Conceptos Basales</span>
+      </button>
+      <button onclick="switchTab('tab-modulo2')" id="btn-tab-modulo2" class="text-gray-700 hover:bg-gray-100 flex-1 lg:flex-none text-left py-2.5 px-4 rounded-xl text-sm font-medium transition flex items-center gap-2.5">
+        <i class="fa-solid fa-scale-balanced text-sm text-[#436600]"></i>
+        <span>2. Sistema Internacional (SI)</span>
+      </button>
+      <button onclick="switchTab('tab-modulo3')" id="btn-tab-modulo3" class="text-gray-700 hover:bg-gray-100 flex-1 lg:flex-none text-left py-2.5 px-4 rounded-xl text-sm font-medium transition flex items-center gap-2.5">
+        <i class="fa-solid fa-clipboard-user text-sm text-[#436600]"></i>
+        <span>3. Aplicaciones en Guardia</span>
+      </button>
+
+      <!-- Tarjeta lateral clínica -->
+      <div class="hidden lg:block mt-4 pt-3 border-t border-gray-100 bg-[#f1f6eb]/80 p-3 rounded-xl border border-[#436600]/20 text-xs text-slate-700 space-y-1">
+        <div class="font-bold text-[#436600] flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
+          <i class="fa-solid fa-shield-halved"></i> Seguridad Metrológica
+        </div>
+        <p class="leading-relaxed text-gray-600 text-[11.5px]">
+          Los símbolos son entidades matemáticas invariables: jamás llevan punto abreviativo ni la letra "s" para el plural. Decir <strong class="text-slate-800">kg</strong>, <strong class="text-slate-800">m</strong> y <strong class="text-slate-800">s</strong> previene errores farmacológicos críticos.
+        </p>
+      </div>
+    </nav>
+
+    <!-- Área de Contenido Principal -->
+    <section class="flex-1 min-w-0">
+
+      <!-- ================= PRESENTACIÓN GENERAL ================= -->
+      <div id="tab-inicio" class="tab-content active space-y-6">
+        <div class="bg-gradient-to-br from-white to-[#f1f6eb] rounded-2xl p-6 sm:p-8 border border-gray-200/80 shadow-sm relative overflow-hidden">
+          <div class="absolute right-0 top-0 translate-x-10 -translate-y-10 w-52 h-52 bg-[#436600]/10 rounded-full pointer-events-none"></div>
+          <div class="max-w-2xl relative z-10 space-y-4">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white border border-[#436600]/30 text-[#436600] shadow-xs">
+              <i class="fa-solid fa-graduation-cap"></i> Curso de Ingreso • FCM UCCuyo
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+              Magnitudes, Medidas y Sistema Internacional de Unidades
+            </h2>
+            <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+              Bienvenido al simulador interactivo de <strong>Metrología Sanitaria</strong>. En la práctica profesional de enfermería, registrar un signo vital, administrar una medicación o evaluar el peso de un recién nacido exige distinguir con rigor absoluto entre la cualidad observada, el proceso de medición, el patrón de referencia y su símbolo estandarizado.
+            </p>
+            <div class="pt-2 flex flex-wrap gap-3">
+              <button onclick="switchTab('tab-modulo1')" class="px-5 py-2.5 bg-accent hover:bg-accent-hover text-white text-xs font-semibold rounded-xl shadow-sm transition flex items-center gap-2">
+                <span>Iniciar Módulo 1</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <button onclick="openTutorial()" class="px-4 py-2.5 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 text-xs font-semibold rounded-xl transition flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-[#436600]"></i>
+                <span>Ver Guía de Uso</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Bloques Temáticos -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div onclick="switchTab('tab-modulo1')" class="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs card-hover cursor-pointer space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-[#f1f6eb] text-[#436600] flex items-center justify-center font-bold text-base">
+              <i class="fa-solid fa-cubes"></i>
+            </div>
+            <h3 class="text-base font-bold text-gray-900">1. Los Cuatro Pilares Basales</h3>
+            <p class="text-gray-500 text-xs leading-relaxed">Diferenciación conceptual entre Magnitud, Medir, Unidad de Medida y Símbolo con el desglose clínico del recién nacido (3,200 kg).</p>
+          </div>
+
+          <div onclick="switchTab('tab-modulo2')" class="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs card-hover cursor-pointer space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-[#f1f6eb] text-[#436600] flex items-center justify-center font-bold text-base">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <h3 class="text-base font-bold text-gray-900">2. El Sistema Internacional (SI)</h3>
+            <p class="text-gray-500 text-xs leading-relaxed">Las 7 magnitudes fundamentales, su unificación universal y la correlación hospitalaria de Kelvin (K) con el grado Celsius (°C).</p>
+          </div>
+
+          <div onclick="switchTab('tab-modulo3')" class="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs card-hover cursor-pointer space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-[#f1f6eb] text-[#436600] flex items-center justify-center font-bold text-base">
+              <i class="fa-solid fa-clipboard-user"></i>
+            </div>
+            <h3 class="text-base font-bold text-gray-900">3. Aplicaciones en la Guardia</h3>
+            <p class="text-gray-500 text-xs leading-relaxed">Monitoreo simulado de signos vitales e infusiones: distinción operativa entre magnitud y medida en el pase de guardia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= MÓDULO 1: CONCEPTOS BASALES ================= -->
+      <div id="tab-modulo1" class="tab-content space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+            <div>
+              <span class="text-xs font-bold text-[#436600] uppercase tracking-wider bg-[#f1f6eb] px-2.5 py-0.5 rounded">Módulo 1</span>
+              <h2 class="text-xl font-bold text-gray-900 mt-1">Los Cuatro Pilares de la Metrología Sanitaria</h2>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-gray-400 font-semibold">FCM • UCCuyo</span>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            En la labor diaria de enfermería, administrar un medicamento, calibrar una bomba de infusión o registrar signos vitales exige distinguir con absoluta precisión entre <strong>qué propiedad observamos</strong>, <strong>el acto de cuantificarla</strong>, <strong>el patrón de comparación</strong> y <strong>su notación formal</strong>.
+          </p>
+        </div>
+
+        <!-- Cuadrícula interactiva de 4 Conceptos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Tarjeta 1: Magnitud -->
+          <div class="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs card-hover group">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-lg mb-3">
+              <i class="fa-solid fa-ruler-combined"></i>
+            </div>
+            <span class="text-[11px] font-bold text-blue-700 uppercase tracking-wider">Concepto 01</span>
+            <h3 class="text-base font-bold text-gray-900 mb-1.5">Magnitud</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Toda <strong>propiedad de un cuerpo o fenómeno</strong> que es susceptible de ser medida objetivamente (adquiriendo un valor numérico y una dimensión física).
+            </p>
+            <div class="mt-3 pt-3 border-t border-gray-100 text-[11px] text-gray-500">
+              <span class="font-bold text-gray-700">Enfermería:</span> Masa corporal, temperatura, tiempo de infusión, longitud del neonato.
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Medir -->
+          <div class="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs card-hover group">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-lg mb-3">
+              <i class="fa-solid fa-scale-unbalanced"></i>
+            </div>
+            <span class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Concepto 02</span>
+            <h3 class="text-base font-bold text-gray-900 mb-1.5">Medir</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              El <strong>acto de comparar</strong> experimentalmente una magnitud con otra de referencia tomada arbitrariamente como unidad, pero de su <strong>misma naturaleza</strong>.
+            </p>
+            <div class="mt-3 pt-3 border-t border-gray-100 text-[11px] text-gray-500">
+              <span class="font-bold text-gray-700">Enfermería:</span> Colocar al recién nacido en la balanza para confrontar su masa con el patrón.
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Unidad de Medida -->
+          <div class="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs card-hover group">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-lg mb-3">
+              <i class="fa-solid fa-cube"></i>
+            </div>
+            <span class="text-[11px] font-bold text-purple-700 uppercase tracking-wider">Concepto 03</span>
+            <h3 class="text-base font-bold text-gray-900 mb-1.5">Unidad de Medida</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              <strong>Cantidad de referencia estandarizada</strong> que se adopta por convención internacional para poder cuantificar magnitudes de una misma naturaleza.
+            </p>
+            <div class="mt-3 pt-3 border-t border-gray-100 text-[11px] text-gray-500">
+              <span class="font-bold text-gray-700">Enfermería:</span> Kilogramo, metro, segundo, grado Celsius, litro.
+            </div>
+          </div>
+
+          <!-- Tarjeta 4: Símbolo -->
+          <div class="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs card-hover group">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-lg mb-3">
+              <i class="fa-solid fa-font"></i>
+            </div>
+            <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider">Concepto 04</span>
+            <h3 class="text-base font-bold text-gray-900 mb-1.5">Símbolo</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              La <strong>representación gráfica convencional</strong> estipulada para una unidad. No lleva punto abreviativo ni admite plurales ("s").
+            </p>
+            <div class="mt-3 pt-3 border-t border-gray-100 text-[11px] text-gray-500">
+              <span class="font-bold text-gray-700">Enfermería:</span> <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-800 font-bold">kg</code> (correcto), nunca <em>kgs</em> ni <em>kgr</em>.
+            </div>
+          </div>
+        </div>
+
+        <!-- Demostrador Clínico Interactivo: Caso Neonato -->
+        <div class="bg-white rounded-2xl border border-gray-200/80 shadow-xs p-6">
+          <div class="flex flex-col lg:flex-row items-center gap-6">
+            <div class="w-full lg:w-1/3 text-center bg-[#f1f6eb]/60 p-6 rounded-2xl border border-[#436600]/20">
+              <div class="inline-flex p-4 rounded-full bg-white text-[#436600] mb-3 text-3xl shadow-xs border border-[#436600]/20">
+                <i class="fa-solid fa-baby"></i>
+              </div>
+              <h4 class="text-base font-bold text-gray-900">Caso Pediátrico: Sala de Partos</h4>
+              <p class="text-xs text-gray-500 mt-1 mb-4">Ingreso de neonato para control somatométrico inmediato.</p>
+              <div class="bg-white py-3 px-6 rounded-xl shadow-xs border border-[#436600]/20 inline-block">
+                <span class="text-[10px] font-semibold text-gray-400 block uppercase">Registro en Hoja Clínica</span>
+                <span class="text-3xl font-extrabold text-[#436600] tracking-tight">3,200 kg</span>
+              </div>
+              <p class="text-[11px] text-gray-500 mt-2">Desglose metrológico analítico según los cuatro conceptos:</p>
+            </div>
+
+            <div class="w-full lg:w-2/3 space-y-3">
+              <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wide flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass text-[#436600]"></i> Desglose Clínico de la Medición "3,200 kg"
+              </h4>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-3.5 rounded-xl border border-blue-100 bg-blue-50/50">
+                  <span class="text-[10px] font-bold text-blue-700 uppercase">1. Magnitud evaluada</span>
+                  <p class="text-base font-bold text-gray-900">Masa corporal</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Propiedad física que cuantifica la cantidad de materia del recién nacido.</p>
+                </div>
+
+                <div class="p-3.5 rounded-xl border border-emerald-100 bg-emerald-50/50">
+                  <span class="text-[10px] font-bold text-emerald-700 uppercase">2. La Medida (Resultado)</span>
+                  <p class="text-base font-bold text-gray-900">3,200 kg</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Es el conjunto del valor numérico comparado y la unidad correspondiente.</p>
+                </div>
+
+                <div class="p-3.5 rounded-xl border border-purple-100 bg-purple-50/50">
+                  <span class="text-[10px] font-bold text-purple-700 uppercase">3. Unidad de Medida</span>
+                  <p class="text-base font-bold text-gray-900">Kilogramo</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Patrón de referencia estándar universal del Sistema Internacional.</p>
+                </div>
+
+                <div class="p-3.5 rounded-xl border border-amber-100 bg-amber-50/50">
+                  <span class="text-[10px] font-bold text-amber-700 uppercase">4. Símbolo Normalizado</span>
+                  <p class="text-base font-bold text-gray-900">kg</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Notación literal estricta (en minúsculas, sin plurales ni puntuación).</p>
+                </div>
+              </div>
+
+              <div class="mt-3 p-3 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl text-xs text-amber-900">
+                <strong>Advertencia de Seguridad Asistencial:</strong> En enfermería, confundir masa con peso o escribir abreviaturas incorrectas (como <em>"kgr"</em> o <em>"grs"</em>) en recetas o historias clínicas puede provocar errores graves en la dosificación pediátrica.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= MÓDULO 2: SISTEMA INTERNACIONAL (SI) ================= -->
+      <div id="tab-modulo2" class="tab-content space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+            <div>
+              <span class="text-xs font-bold text-[#436600] uppercase tracking-wider bg-[#f1f6eb] px-2.5 py-0.5 rounded">Módulo 2</span>
+              <h2 class="text-xl font-bold text-gray-900 mt-1">El Sistema Internacional de Unidades (SI)</h2>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-gray-400 font-semibold">FCM • UCCuyo</span>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Nacido para eliminar la confusión entre sistemas de medidas dispares, el SI establece un lenguaje unificado y reproducible en la ciencia, la farmacéutica y la práctica hospitalaria. Se fundamenta en <strong>7 magnitudes físicas independientes</strong>.
+          </p>
+        </div>
+
+        <!-- Cuadro Comparativo de las 7 Magnitudes -->
+        <div class="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden">
+          <div class="p-5 bg-gray-50 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div>
+              <h3 class="font-bold text-gray-900 text-base">Las 7 Magnitudes Fundamentales del SI</h3>
+              <p class="text-xs text-gray-500">Destacadas con prioridad las de aplicación constante en el curso de enfermería.</p>
+            </div>
+            <span class="text-xs bg-[#f1f6eb] text-[#436600] px-3 py-1 rounded-full font-semibold border border-[#436600]/20">
+              Conocimiento Obligatorio de Ingreso
+            </span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs sm:text-sm">
+              <thead class="bg-gray-100 text-gray-700 uppercase font-bold text-[11px] tracking-wider border-b border-gray-200">
+                <tr>
+                  <th class="p-3.5 sm:px-6">Magnitud Fundamental</th>
+                  <th class="p-3.5 sm:px-6">Unidad Oficial (SI)</th>
+                  <th class="p-3.5 sm:px-6">Símbolo</th>
+                  <th class="p-3.5 sm:px-6">Relevancia en Enfermería / Salud</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 font-normal text-gray-700">
+                <!-- Longitud -->
+                <tr class="bg-blue-50/40 hover:bg-blue-50 transition">
+                  <td class="p-3.5 sm:px-6 font-semibold flex items-center gap-2 text-blue-800">
+                    <i class="fa-solid fa-arrows-left-right text-blue-600"></i> Longitud
+                  </td>
+                  <td class="p-3.5 sm:px-6 font-medium">Metro</td>
+                  <td class="p-3.5 sm:px-6 font-mono font-bold text-gray-900 bg-gray-100 rounded w-fit px-2 py-0.5">m</td>
+                  <td class="p-3.5 sm:px-6 text-xs text-gray-600">Estatura/talla del paciente, perímetro cefálico, cálculo de superficie corporal.</td>
+                </tr>
+
+                <!-- Masa -->
+                <tr class="bg-blue-50/40 hover:bg-blue-50 transition">
+                  <td class="p-3.5 sm:px-6 font-semibold flex items-center gap-2 text-blue-800">
+                    <i class="fa-solid fa-weight-scale text-blue-600"></i> Masa
+                  </td>
+                  <td class="p-3.5 sm:px-6 font-medium">Kilogramo</td>
+                  <td class="p-3.5 sm:px-6 font-mono font-bold text-gray-900 bg-gray-100 rounded w-fit px-2 py-0.5">kg</td>
+                  <td class="p-3.5 sm:px-6 text-xs text-gray-600">Pesaje para dosificación farmacológica exacta (mg/kg/día), nutrición e IMC.</td>
+                </tr>
+
+                <!-- Tiempo -->
+                <tr class="bg-blue-50/40 hover:bg-blue-50 transition">
+                  <td class="p-3.5 sm:px-6 font-semibold flex items-center gap-2 text-blue-800">
+                    <i class="fa-solid fa-stopwatch text-blue-600"></i> Tiempo
+                  </td>
+                  <td class="p-3.5 sm:px-6 font-medium">Segundo</td>
+                  <td class="p-3.5 sm:px-6 font-mono font-bold text-gray-900 bg-gray-100 rounded w-fit px-2 py-0.5">s</td>
+                  <td class="p-3.5 sm:px-6 text-xs text-gray-600">Frecuencia cardíaca/respiratoria (ciclos/min o s), velocidad de goteo intravenoso.</td>
+                </tr>
+
+                <!-- Temperatura -->
+                <tr class="bg-blue-50/40 hover:bg-blue-50 transition">
+                  <td class="p-3.5 sm:px-6 font-semibold flex items-center gap-2 text-blue-800">
+                    <i class="fa-solid fa-temperature-half text-blue-600"></i> Temperatura
+                  </td>
+                  <td class="p-3.5 sm:px-6 font-medium">
+                    Kelvin 
+                    <span class="block text-[11px] text-amber-700 font-semibold mt-0.5">
+                      *Uso hospitalario: grado Celsius (°C)
+                    </span>
+                  </td>
+                  <td class="p-3.5 sm:px-6 font-mono font-bold text-gray-900 bg-gray-100 rounded w-fit px-2 py-0.5">
+                    K <span class="text-xs text-gray-500 block font-normal">(°C en clínica)</span>
+                  </td>
+                  <td class="p-3.5 sm:px-6 text-xs text-gray-600">Control de curva febril, hipotermia perioperatoria y termorregulación neonatal.</td>
+                </tr>
+
+                <!-- Corriente -->
+                <tr class="hover:bg-gray-50 transition">
+                  <td class="p-3.5 sm:px-6 font-semibold flex items-center gap-2 text-gray-600">
+                    <i class="fa-solid fa-bolt text-gray-400"></i> Intensidad de Corriente
+                  </td>
+                  <td class="p-3.5 sm:px-6">Amperio</td>
+                  <td class="p-3.5 sm:px-6 font-mono font-bold text-gray-700">A</td>
+                  <td class="p-3.5 sm:px-6 text-xs text-gray-500">Electromedicina y desfibriladores (mención de completitud del SI).</td>
+                </tr>
+
+                <!-- Cantidad de sustancia -->
+                <tr class="hover:bg-gray-50 transition">
+                  <td class="p-3.5 sm:px-6 font-semibold flex items-center gap-2 text-gray-600">
+                    <i class="fa-solid fa-flask-vial text-gray-400"></i> Cantidad de Sustancia
+                  </td>
+                  <td class="p-3.5 sm:px-6">Mol</td>
+                  <td class="p-3.5 sm:px-6 font-mono font-bold text-gray-700">mol</td>
+                  <td class="p-3.5 sm:px-6 text-xs text-gray-500">Osmolaridad y gases en sangre (mención conceptual inicial).</td>
+                </tr>
+
+                <!-- Intensidad luminosa -->
+                <tr class="hover:bg-gray-50 transition">
+                  <td class="p-3.5 sm:px-6 font-semibold flex items-center gap-2 text-gray-600">
+                    <i class="fa-solid fa-sun text-gray-400"></i> Intensidad Luminosa
+                  </td>
+                  <td class="p-3.5 sm:px-6">Candela</td>
+                  <td class="p-3.5 sm:px-6 font-mono font-bold text-gray-700">cd</td>
+                  <td class="p-3.5 sm:px-6 text-xs text-gray-500">Fototerapia neonatal y quirófanos (mención conceptual de completitud).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Nota Pedagógica: Kelvin vs Celsius -->
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex items-start gap-3">
+          <i class="fa-solid fa-circle-exclamation text-amber-600 text-lg mt-0.5"></i>
+          <div class="text-xs sm:text-sm text-amber-900 leading-relaxed">
+            <strong class="font-bold">Aclaración Clave para el Ingreso a Enfermería:</strong>
+            Si bien la unidad fundamental de temperatura termodinámica en el SI es el <strong>Kelvin (K)</strong>, en la práctica clínica diaria en San Juan y en todo el sistema sanitario se emplea de manera sistemática la escala derivada en <strong>grados Celsius (°C)</strong> por su directa correlación fisiológica (donde 0 °C es el punto de congelación y 100 °C el de ebullición del agua a presión normal). Más adelante estudiarás sus equivalencias numéricas: <code class="bg-amber-100 px-1 py-0.5 rounded font-mono font-bold">K = °C + 273,15</code>.
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= MÓDULO 3: APLICACIONES EN GUARDIA ================= -->
+      <div id="tab-modulo3" class="tab-content space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+            <div>
+              <span class="text-xs font-bold text-[#436600] uppercase tracking-wider bg-[#f1f6eb] px-2.5 py-0.5 rounded">Módulo 3</span>
+              <h2 class="text-xl font-bold text-gray-900 mt-1">Magnitud vs. Medida en la Guardia Hospitalaria</h2>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-gray-400 font-semibold">FCM • UCCuyo</span>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            En un pase de guardia o al ingresar a la habitación de un paciente, el profesional de enfermería interactúa de forma constante con magnitudes vitales. No confundas la cualidad física abstracta con el resultado numérico obtenido.
+          </p>
+        </div>
+
+        <!-- Simulador de Monitor Clínico -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Tarjeta 1: Control Térmico -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 border border-slate-700 shadow-md relative flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center text-xs text-rose-400 font-mono mb-2">
+                <span class="font-bold tracking-widest uppercase">TEMP AXILAR</span>
+                <i class="fa-solid fa-temperature-arrow-up text-base animate-pulse"></i>
+              </div>
+              <div class="text-3xl font-extrabold text-rose-400 font-mono my-2">37,5 °C</div>
+              <div class="text-xs text-slate-300 space-y-1 mt-3 pt-3 border-t border-slate-800">
+                <p><span class="text-slate-400">Magnitud:</span> <strong>Temperatura</strong></p>
+                <p><span class="text-slate-400">Medida obtenida:</span> <strong>37,5 °C</strong></p>
+                <p><span class="text-slate-400">Estado clínico:</span> Febrícula / Alerta</p>
+              </div>
+            </div>
+            <div class="mt-4 bg-slate-800/80 p-2 rounded text-[11px] text-slate-300">
+              Termómetro digital en contacto axilar durante el tiempo estipulado.
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Cronometraje -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 border border-slate-700 shadow-md relative flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center text-xs text-emerald-400 font-mono mb-2">
+                <span class="font-bold tracking-widest uppercase">CRONOMETRAJE SIGNOS</span>
+                <i class="fa-solid fa-heart-pulse text-base animate-pulse"></i>
+              </div>
+              <div class="text-3xl font-extrabold text-emerald-400 font-mono my-2">60 s</div>
+              <div class="text-xs text-slate-300 space-y-1 mt-3 pt-3 border-t border-slate-800">
+                <p><span class="text-slate-400">Magnitud:</span> <strong>Tiempo</strong></p>
+                <p><span class="text-slate-400">Medida patrón:</span> <strong>60 s</strong> (1 minuto)</p>
+                <p><span class="text-slate-400">Parámetro:</span> Frecuencia Cardíaca</p>
+              </div>
+            </div>
+            <div class="mt-4 bg-slate-800/80 p-2 rounded text-[11px] text-slate-300">
+              Conteo de latidos arteriales radiales mediante segundero continuo.
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Control Ponderal -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 border border-slate-700 shadow-md relative flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center text-xs text-cyan-400 font-mono mb-2">
+                <span class="font-bold tracking-widest uppercase">CONTROL PONDERAL</span>
+                <i class="fa-solid fa-scale-balanced text-base"></i>
+              </div>
+              <div class="text-3xl font-extrabold text-cyan-400 font-mono my-2">3,200 kg</div>
+              <div class="text-xs text-slate-300 space-y-1 mt-3 pt-3 border-t border-slate-800">
+                <p><span class="text-slate-400">Magnitud:</span> <strong>Masa corporal</strong></p>
+                <p><span class="text-slate-400">Medida obtenida:</span> <strong>3,200 kg</strong></p>
+                <p><span class="text-slate-400">Sujeto:</span> Recién nacido a término</p>
+              </div>
+            </div>
+            <div class="mt-4 bg-slate-800/80 p-2 rounded text-[11px] text-slate-300">
+              Balanza de lactantes tarada a cero y con protector estéril.
+            </div>
+          </div>
+
+          <!-- Tarjeta 4: Plan de Hidratación -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 border border-slate-700 shadow-md relative flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center text-xs text-purple-400 font-mono mb-2">
+                <span class="font-bold tracking-widest uppercase">BALANCE HIDROLÍTICO</span>
+                <i class="fa-solid fa-droplet text-base"></i>
+              </div>
+              <div class="text-3xl font-extrabold text-purple-400 font-mono my-2">100 ml</div>
+              <div class="text-xs text-slate-300 space-y-1 mt-3 pt-3 border-t border-slate-800">
+                <p><span class="text-slate-400">Magnitud:</span> <strong>Volumen</strong> (Derivada)</p>
+                <p><span class="text-slate-400">Medida infundida:</span> <strong>100 ml</strong></p>
+                <p><span class="text-slate-400">Indicación:</span> Solución Fisiológica 0,9%</p>
+              </div>
+            </div>
+            <div class="mt-4 bg-slate-800/80 p-2 rounded text-[11px] text-slate-300">
+              Perfusión intravenosa graduada mediante microgotero buretrol.
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumen comparativo para estudio -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-xs">
+          <h3 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-lightbulb text-amber-500"></i> Regla de Oro para el Futuro Licenciado/a
+          </h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Siempre que te soliciten la <span class="font-bold text-gray-800">magnitud</span>, la respuesta es el concepto físico: <em>"Masa", "Temperatura", "Tiempo" o "Volumen"</em>. Jamás respondas un valor numérico. Por el contrario, cuando te soliciten la <span class="font-bold text-gray-800">medida</span>, debes informar siempre el número junto con su unidad reglamentaria (por ejemplo, <em>"38,2 °C"</em> o <em>"500 ml"</em>). Decir únicamente <em>"le pasé 500"</em> o <em>"pesa 3"</em> es una práctica negligente.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- GUÍA DE USO MODAL -->
+  <div id="tutorial-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-xl border border-gray-100 flex flex-col gap-4 relative">
+      <button onclick="closeTutorial()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      
+      <div class="flex items-center gap-2.5 border-b border-gray-100 pb-3">
+        <div class="w-8 h-8 rounded-lg bg-accent-light flex items-center justify-center text-accent font-bold text-base">
+          💡
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-slate-800 font-sans">Guía de Uso del Simulador de Metrología y Sistema Internacional</h3>
+          <p class="text-[11px] text-gray-500">Orientaciones para el estudio de magnitudes en el Curso de Ingreso a Enfermería (FCM - UCCuyo)</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 text-xs text-slate-600 leading-relaxed overflow-y-auto max-h-[360px] pr-2 custom-scroll">
+        <div class="p-3 bg-accent-light/60 rounded-xl border border-accent/20">
+          <strong class="text-accent block mb-1 font-sans text-xs">🎯 Propósito del Simulador</strong>
+          Este entorno interactivo ha sido desarrollado para que los aspirantes a la <strong>Licenciatura en Enfermería</strong> dominen los cuatro conceptos basales de la metrología (magnitud, medir, unidad y símbolo), reconozcan las 7 magnitudes fundamentales del Sistema Internacional (SI) y apliquen este rigor para prevenir errores en la administración de fármacos y registros clínicos.
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-150">
+          <strong class="text-primary block mb-1 font-sans">🧭 Cómo Navegar por los Módulos</strong>
+          Utiliza la <strong>barra lateral izquierda</strong> para alternar fluidamente entre la presentación general y los 3 módulos temáticos. Cada sección cuenta con explicaciones teóricas, cuadros interactivos, advertencias de seguridad y comparaciones clínicas directas.
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-150 space-y-1.5">
+          <strong class="text-primary block font-sans">📚 Estructura de los Módulos Temáticos:</strong>
+          <ul class="space-y-1.5 text-[11px] text-gray-600 pl-1">
+            <li><strong>1. Conceptos Basales:</strong> Definición precisa de los 4 pilares (Magnitud, Medir, Unidad de Medida y Símbolo) con tarjetas cromáticas codificadas, el análisis metrológico del caso pediátrico del recién nacido (3,200 kg) y pautas de prevención del error asistencial.</li>
+            <li><strong>2. Sistema Internacional (SI):</strong> Cuadro comparativo interactivo con las 7 magnitudes fundamentales del SI (longitud, masa, tiempo, temperatura, corriente eléctrica, cantidad de sustancia e intensidad luminosa), sus unidades oficiales y símbolos, junto a la fundamentación de equivalencia entre Kelvin (K) y el grado Celsius (°C).</li>
+            <li><strong>3. Aplicaciones en Guardia:</strong> Monitores clínicos simulados para el control térmico axilar (37,5 °C), cronometraje de signos vitales (60 s), control ponderal en balanza tarada (3,200 kg) y balance hidroelectrolítico de infusiones parenterales (100 ml), reforzando la regla de oro: <em>nunca responder un valor numérico cuando se solicita la magnitud</em>.</li>
+          </ul>
+        </div>
+
+        <div class="p-3 bg-[#f1f6eb]/80 rounded-xl border border-[#436600]/20 space-y-1">
+          <strong class="text-[#436600] block font-sans text-[11px] uppercase tracking-wide">💡 Recomendación para el Aspirante:</strong>
+          <p class="text-[11px] text-gray-650 leading-relaxed">
+            Presta especial atención a la notación de los símbolos: recuerda que son entidades matemáticas invariables, escritas en minúsculas (salvo excepciones como Kelvin o derivadas de nombres propios) y que <strong>nunca llevan punto abreviativo ni "s" de plural</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-1 pt-2 border-t border-gray-100 flex items-center justify-between">
+        <span class="text-[10.5px] text-gray-400 font-medium">UCCuyo • Matemática en Enfermería</span>
+        <button onclick="closeTutorial()" class="bg-primary text-white font-semibold py-2 px-5 rounded-lg text-xs hover:opacity-90 transition shadow-sm">
+          Entendido, Explorar Simulador
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página institucional -->
+  <footer class="bg-white border-t border-gray-200 mt-6">
+    <div class="max-w-6xl mx-auto px-4 py-3 text-center text-xs text-gray-500 font-semibold tracking-wide">
+      Desarrollado por vesalio - Todos los derechos reservados
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE LÓGICA E INTERACTIVIDAD -->
+  <script>
+    /* ===================================================
+       MODAL GUÍA DE USO
+       =================================================== */
+    function openTutorial() {
+      document.getElementById('tutorial-modal').classList.remove('hidden');
+    }
+
+    function closeTutorial() {
+      document.getElementById('tutorial-modal').classList.add('hidden');
+    }
+
+    /* ===================================================
+       NAVEGACIÓN POR PESTAÑAS (SIDEBAR)
+       =================================================== */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('active');
+      });
+
+      const activeSec = document.getElementById(tabId);
+      if (activeSec) {
+        activeSec.classList.remove('hidden');
+        activeSec.classList.add('active');
+      }
+
+      // Sidebar buttons style
+      const tabKeys = ['inicio', 'modulo1', 'modulo2', 'modulo3'];
+      tabKeys.forEach(k => {
+        const btn = document.getElementById('btn-tab-' + k);
+        if (btn) {
+          if (tabId === 'tab-' + k) {
+            btn.className = 'bg-accent text-white flex-1 lg:flex-none text-left py-2.5 px-4 rounded-xl text-sm font-semibold transition flex items-center gap-2.5 shadow-xs';
+            const icon = btn.querySelector('i');
+            if (icon) {
+              icon.classList.remove('text-[#436600]');
+              icon.classList.add('text-white');
+            }
+          } else {
+            btn.className = 'text-gray-700 hover:bg-gray-100 flex-1 lg:flex-none text-left py-2.5 px-4 rounded-xl text-sm font-medium transition flex items-center gap-2.5';
+            const icon = btn.querySelector('i');
+            if (icon) {
+              icon.classList.remove('text-white');
+              icon.classList.add('text-[#436600]');
+            }
+          }
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
